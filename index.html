@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chá de Fraldas do Noah 💙</title>
+<meta property="og:title" content="Chá de Fraldas do Noah" />
+<meta property="og:description" content="Sábado, 20 de Junho às 15:30 — Condomínio Caledônia, Camboriú. Confirme sua presença!" />
+<meta property="og:image" content="convite.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#4674b0;
+    --azul-claro:#cfe0f0;
+    --azul-suave:#eaf2fb;
+    --creme:#f5edda;
+    --marrom:#7a5a3a;
+    --branco:#ffffff;
+    --texto:#3d5878;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Quicksand',sans-serif;
+    color:var(--texto);
+    background:linear-gradient(180deg,#d4e6f7 0%,#eaf2fb 40%,#f5f9ff 100%);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ===== Nuvens flutuando no fundo ===== */
+  .sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+  .cloud{
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+    filter:blur(2px);
+    opacity:.7;
+    animation:drift linear infinite;
+  }
+  .cloud::before,.cloud::after{
+    content:"";position:absolute;background:#fff;border-radius:50%;
+  }
+  .cloud::before{width:60%;height:120%;top:-30%;left:15%;}
+  .cloud::after{width:50%;height:100%;top:-10%;left:55%;}
+  @keyframes drift{
+    from{transform:translateX(-25vw);}
+    to{transform:translateX(125vw);}
+  }
+  /* estrelinhas piscando */
+  .star{position:absolute;color:#fff;opacity:.8;animation:twinkle ease-in-out infinite;text-shadow:0 0 6px rgba(255,255,255,.9);}
+  @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8);}50%{opacity:.9;transform:scale(1.1);}}
+
+  /* ===== Conteúdo ===== */
+  .wrap{position:relative;z-index:2;max-width:560px;margin:0 auto;padding:28px 18px 60px;text-align:center;}
+
+  .hero{
+    opacity:0;transform:translateY(24px) scale(.98);
+    animation:rise 1.1s cubic-bezier(.2,.7,.3,1) .15s forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0) scale(1);}}
+
+  .art{
+    width:100%;
+    max-width:480px;
+    border-radius:22px;
+    box-shadow:0 18px 50px rgba(70,116,176,.28);
+    display:block;margin:0 auto;
+    animation:floaty 6s ease-in-out 1.2s infinite;
+  }
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  /* ===== Arte recriada em HTML/CSS (usada se não houver convite.png) ===== */
+  .invite{
+    position:relative;width:100%;max-width:480px;margin:0 auto;
+    border-radius:22px;overflow:hidden;
+    background:repeating-linear-gradient(180deg,#ffffff 0 22px,#d4e6f7 22px 44px);
+    box-shadow:0 18px 50px rgba(70,116,176,.28);
+    padding:26px 20px 30px;
+    animation:floaty 6s ease-in-out 1.2s infinite;
+  }
+  .invite .cl{position:absolute;background:#fff;border-radius:50%;filter:blur(.5px);box-shadow:0 0 0 8px rgba(255,255,255,.55);z-index:1;}
+  .invite .cl.c1{width:70px;height:34px;top:14px;left:10px;}
+  .invite .cl.c2{width:90px;height:42px;top:8px;right:8px;}
+  .invite .cl.c3{width:80px;height:38px;bottom:18px;left:6px;}
+  .invite .cl.c4{width:64px;height:30px;bottom:30px;right:14px;}
+  .invite-arch{
+    position:relative;z-index:3;
+    background:var(--azul);color:#fff;
+    border-radius:160px 160px 30px 30px;
+    padding:24px 18px 26px;max-width:300px;margin:4px auto 0;
+    box-shadow:0 10px 24px rgba(70,116,176,.32);
+  }
+  .invite-arch small{display:block;font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:.92;margin-bottom:2px;}
+  .invite-arch .nome{font-family:'Dancing Script',cursive;font-size:66px;line-height:.95;font-weight:700;text-shadow:0 3px 8px rgba(0,0,0,.18);}
+  .teddy{position:relative;z-index:3;font-size:64px;margin:-6px 0 0;filter:drop-shadow(0 8px 10px rgba(0,0,0,.18));}
+  .teddy .base{font-size:30px;margin-top:-10px;}
+  .invite-panel{
+    position:relative;z-index:3;
+    background:var(--creme);border-radius:22px;
+    padding:18px 18px 20px;margin-top:6px;
+    box-shadow:0 6px 16px rgba(70,116,176,.14);
+  }
+  .invite-panel .conv{font-size:15px;line-height:1.45;color:#6b6256;}
+  .invite-panel .quando{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0 10px;}
+  .invite-panel .quando .dia{color:var(--marrom);}
+  .invite-panel .quando .num{font-size:34px;font-weight:700;line-height:1;color:var(--marrom);}
+  .invite-panel .quando .mes{font-size:13px;letter-spacing:1px;}
+  .invite-panel .quando .sep{width:2px;height:46px;background:repeating-linear-gradient(var(--azul) 0 4px,transparent 4px 8px);opacity:.5;}
+  .invite-panel .quando .hora{font-size:30px;font-weight:700;color:var(--marrom);}
+  .invite-panel .local{font-size:15px;color:#5b5246;margin-top:8px;line-height:1.4;}
+  .invite-panel .local b{color:var(--azul);}
+  .invite-panel .gift{
+    border:2px dashed rgba(70,116,176,.45);border-radius:14px;
+    padding:10px 12px;margin-top:14px;font-size:14px;color:#6b6256;
+  }
+  .invite-panel .gift b{color:var(--azul);letter-spacing:1px;}
+  .invite-panel .rsvp{font-size:14px;color:var(--azul);margin-top:14px;font-weight:600;}
+
+  .titulo{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(38px,11vw,58px);
+    color:var(--azul);
+    margin:26px 0 2px;
+    opacity:0;animation:rise 1s ease .5s forwards;
+  }
+  .sub{font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--marrom);opacity:0;animation:rise 1s ease .65s forwards;}
+
+  .card{
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(70,116,176,.15);
+    border-radius:20px;
+    padding:22px 20px;
+    margin:22px auto 0;
+    box-shadow:0 10px 30px rgba(70,116,176,.12);
+    opacity:0;transform:translateY(20px);
+    animation:rise .9s ease forwards;
+  }
+  .card.d1{animation-delay:.8s;}
+  .card.d2{animation-delay:.95s;}
+  .card.d3{animation-delay:1.1s;}
+  .card.d4{animation-delay:1.25s;}
+
+  .card h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--azul);margin-bottom:12px;font-weight:700;}
+  .info-linha{font-size:17px;margin:4px 0;font-weight:500;}
+  .info-linha b{color:var(--marrom);}
+
+  /* contagem regressiva */
+  .countdown{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+  .cd-box{
+    background:var(--azul);color:#fff;border-radius:16px;
+    min-width:74px;padding:14px 8px;
+    box-shadow:0 8px 18px rgba(70,116,176,.3);
+  }
+  .cd-num{font-size:30px;font-weight:700;line-height:1;}
+  .cd-lbl{font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-top:6px;opacity:.85;}
+  .cd-msg{font-size:18px;color:var(--azul);font-weight:600;}
+
+  /* botões */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    width:100%;max-width:360px;
+    padding:16px 22px;margin:8px auto 0;
+    border:none;border-radius:50px;cursor:pointer;
+    font-family:'Quicksand',sans-serif;font-size:17px;font-weight:700;
+    text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-wpp{background:#25d366;color:#fff;box-shadow:0 8px 20px rgba(37,211,102,.4);}
+  .btn-wpp:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(37,211,102,.5);}
+  .btn-map{background:#fff;color:var(--azul);border:2px solid var(--azul);}
+  .btn-map:hover{background:var(--azul);color:#fff;}
+
+  .presente{font-size:16px;line-height:1.5;}
+  .presente .destaque{color:var(--azul);font-weight:700;}
+
+  .rodape{margin-top:34px;font-size:15px;color:var(--marrom);opacity:0;animation:rise 1s ease 1.4s forwards;}
+  .rodape .coracao{color:var(--azul);}
+
+  /* botão de música */
+  .music-btn{
+    position:fixed;top:14px;right:14px;z-index:10;
+    width:50px;height:50px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.85);backdrop-filter:blur(4px);
+    box-shadow:0 6px 16px rgba(70,116,176,.25);
+    font-size:22px;display:flex;align-items:center;justify-content:center;
+    transition:transform .2s ease;
+  }
+  .music-btn:hover{transform:scale(1.08);}
+  .music-btn.spin .ic{animation:rot 3s linear infinite;}
+  @keyframes rot{to{transform:rotate(360deg);}}
+
+  @media(max-width:380px){
+    .cd-box{min-width:64px;}
+    .cd-num{font-size:25px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky"></div>
+
+<button class="music-btn" id="musicBtn" title="Ligar/desligar música">
+  <span class="ic">🔇</span>
+</button>
+
+<div class="wrap">
+
+  <div class="hero">
+    <!-- A arte do convite. Suba sua imagem como "convite.png" no repositório. -->
+    <img src="convite.png" alt="Convite Chá de Fraldas do Noah" class="art"
+         onerror="this.style.display='none';document.getElementById('fb').style.display='block';">
+    <!-- Arte recriada em HTML/CSS — aparece automaticamente se não houver convite.png -->
+    <div id="fb" class="invite" style="display:none;">
+      <span class="cl c1"></span><span class="cl c2"></span>
+      <span class="cl c3"></span><span class="cl c4"></span>
+
+      <div class="invite-arch">
+        <small>Chá de Fraldas do</small>
+        <div class="nome">Noah</div>
+      </div>
+
+      <div class="teddy">🧸<div class="base">☁️ ☁️</div></div>
+
+      <div class="invite-panel">
+        <p class="conv">Mamãe e papai convidam você<br>para o meu Chá de Fraldas 💙</p>
+
+        <div class="quando">
+          <div class="dia">
+            <div class="mes">Sábado</div>
+            <div class="num">20</div>
+            <div class="mes">de Junho</div>
+          </div>
+          <div class="sep"></div>
+          <div class="dia">
+            <div class="mes">às</div>
+            <div class="hora">15:30</div>
+          </div>
+        </div>
+
+        <p class="local"><b>Local:</b><br>Condomínio Caledônia, Camboriú<br>Casa A4 · QM L11</p>
+
+        <div class="gift"><b>SUGESTÃO DE PRESENTE</b><br>Fralda Pampers tamanho P + mimo</div>
+
+        <p class="rsvp">Confirmar presença até o dia 10/06</p>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="titulo">Você é nosso convidado!</h1>
+  <p class="sub">Yamila &amp; Renan</p>
+
+  <!-- Contagem regressiva -->
+  <div class="card d1">
+    <h2>⏳ Contagem regressiva</h2>
+    <div class="countdown" id="cd">
+      <div class="cd-box"><div class="cd-num" id="d">--</div><div class="cd-lbl">dias</div></div>
+      <div class="cd-box"><div class="cd-num" id="h">--</div><div class="cd-lbl">horas</div></div>
+      <div class="cd-box"><div class="cd-num" id="m">--</div><div class="cd-lbl">min</div></div>
+      <div class="cd-box"><div class="cd-num" id="s">--</div><div class="cd-lbl">seg</div></div>
+    </div>
+  </div>
+
+  <!-- Detalhes -->
+  <div class="card d2">
+    <h2>📅 Quando &amp; Onde</h2>
+    <p class="info-linha"><b>Sábado, 20 de Junho</b> · às <b>15:30h</b></p>
+    <p class="info-linha">Condomínio Caledônia — Camboriú</p>
+    <p class="info-linha" style="font-size:15px;opacity:.85;">Casa A4 · QM L11</p>
+    <a class="btn btn-map" id="mapBtn" target="_blank" rel="noopener">📍 Ver no mapa</a>
+  </div>
+
+  <!-- Presente -->
+  <div class="card d3">
+    <h2>🎁 Sugestão de presente</h2>
+    <p class="presente">Fralda <span class="destaque">Pampers tamanho P</span> + um mimo 💙</p>
+  </div>
+
+  <!-- Confirmar presença -->
+  <div class="card d4">
+    <h2>💌 Confirme sua presença</h2>
+    <p class="info-linha" style="font-size:15px;margin-bottom:6px;">Por favor, confirme até <b>10/06</b></p>
+    <a class="btn btn-wpp" id="wppBtn" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.115zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+      Confirmar no WhatsApp
+    </a>
+  </div>
+
+  <p class="rodape">Esperamos por você! <span class="coracao">💙</span><br>Com carinho, Yamila &amp; Renan</p>
+
+</div>
+
+<!-- música de fundo (opcional): adicione um arquivo "musica.mp3" no repositório -->
+<audio id="bg" loop preload="none">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  /* ====== CONFIGURAÇÕES (edite aqui se precisar) ====== */
+  // Data e hora do chá (ano, mês-1, dia, hora, minuto)
+  var ALVO = new Date(2026, 5, 20, 15, 30, 0); // 20/06/2026 15:30
+
+  // WhatsApp para confirmar presença. Formato: 55 + DDD + número.
+  // OBS: números de celular no Brasil têm o "9" depois do DDD.
+  // Se o link não abrir o contato certo, troque por: 5547988815845
+  var WHATS = "554788815845";
+
+  // Endereço para o mapa
+  var ENDERECO = "Condomínio Caledônia, Camboriú, SC";
+  /* ==================================================== */
+
+  // Mensagem pré-pronta do WhatsApp
+  var msg = encodeURIComponent("Olá! Confirmo minha presença no Chá de Fraldas do Noah 💙");
+  document.getElementById('wppBtn').href = "https://wa.me/" + WHATS + "?text=" + msg;
+  document.getElementById('mapBtn').href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ENDERECO);
+
+  // ===== Contagem regressiva =====
+  function dois(n){return n<10?"0"+n:n;}
+  function tick(){
+    var agora=new Date();
+    var dif=ALVO-agora;
+    var cd=document.getElementById('cd');
+    if(dif<=0){
+      cd.innerHTML='<p class="cd-msg">🎉 É hoje! Bem-vindo, Noah! 💙</p>';
+      return;
+    }
+    var d=Math.floor(dif/86400000);
+    var h=Math.floor(dif%86400000/3600000);
+    var m=Math.floor(dif%3600000/60000);
+    var s=Math.floor(dif%60000/1000);
+    document.getElementById('d').textContent=d;
+    document.getElementById('h').textContent=dois(h);
+    document.getElementById('m').textContent=dois(m);
+    document.getElementById('s').textContent=dois(s);
+  }
+  tick();setInterval(tick,1000);
+
+  // ===== Nuvens e estrelas =====
+  (function(){
+    var sky=document.getElementById('sky');
+    for(var i=0;i<6;i++){
+      var c=document.createElement('div');c.className='cloud';
+      var w=80+Math.random()*120;
+      c.style.width=w+'px';c.style.height=(w*0.4)+'px';
+      c.style.top=(Math.random()*70)+'%';
+      c.style.animationDuration=(28+Math.random()*30)+'s';
+      c.style.animationDelay=(-Math.random()*30)+'s';
+      c.style.opacity=0.45+Math.random()*0.35;
+      sky.appendChild(c);
+    }
+    for(var j=0;j<22;j++){
+      var st=document.createElement('div');st.className='star';
+      st.textContent='✦';
+      st.style.left=(Math.random()*100)+'%';
+      st.style.top=(Math.random()*90)+'%';
+      st.style.fontSize=(8+Math.random()*12)+'px';
+      st.style.animationDuration=(2+Math.random()*3)+'s';
+      st.style.animationDelay=(-Math.random()*4)+'s';
+      sky.appendChild(st);
+    }
+  })();
+
+  // ===== Música de fundo =====
+  // 1ª opção: arquivo "musica.mp3" (se você adicionar um).
+  // 2ª opção (padrão): caixinha de música tocada pelo próprio navegador,
+  //   melodia "Brilha, Brilha Estrelinha" (domínio público) — não precisa de arquivo.
+  (function(){
+    var audio=document.getElementById('bg');
+    var btn=document.getElementById('musicBtn');
+    var ic=btn.querySelector('.ic');
+    var on=false;
+
+    // ---- Caixinha de música via Web Audio ----
+    var ctx=null, loopTimer=null, scheduled=[];
+    var N={C4:261.63,D4:293.66,E4:329.63,F4:349.23,G4:392.00,A4:440.00,B4:493.88,C5:523.25};
+    // [nota, batidas]  (1 batida = 0.5s)
+    var melodia=[
+      ['C4',1],['C4',1],['G4',1],['G4',1],['A4',1],['A4',1],['G4',2],
+      ['F4',1],['F4',1],['E4',1],['E4',1],['D4',1],['D4',1],['C4',2],
+      ['G4',1],['G4',1],['F4',1],['F4',1],['E4',1],['E4',1],['D4',2],
+      ['G4',1],['G4',1],['F4',1],['F4',1],['E4',1],['E4',1],['D4',2],
+      ['C4',1],['C4',1],['G4',1],['G4',1],['A4',1],['A4',1],['G4',2],
+      ['F4',1],['F4',1],['E4',1],['E4',1],['D4',1],['D4',1],['C4',2]
+    ];
+    var BEAT=0.5;
+
+    function tocaNota(freq,t0,dur){
+      // timbre de caixinha: dois osciladores suaves + decaimento
+      var g=ctx.createGain();
+      g.gain.setValueAtTime(0.0001,t0);
+      g.gain.exponentialRampToValueAtTime(0.22,t0+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+dur*0.95);
+      g.connect(ctx.destination);
+      [[freq,'triangle',1],[freq*2,'sine',0.35]].forEach(function(o){
+        var osc=ctx.createOscillator();
+        osc.type=o[1];osc.frequency.value=o[0];
+        var gg=ctx.createGain();gg.gain.value=o[2];
+        osc.connect(gg);gg.connect(g);
+        osc.start(t0);osc.stop(t0+dur);
+        scheduled.push(osc);
+      });
+    }
+
+    function agendaCiclo(){
+      var t=ctx.currentTime+0.06, total=0;
+      melodia.forEach(function(n){
+        var dur=n[1]*BEAT;
+        tocaNota(N[n[0]],t,dur);
+        t+=dur; total+=dur;
+      });
+      loopTimer=setTimeout(agendaCiclo,(total+0.4)*1000);
+    }
+
+    function paraCaixinha(){
+      if(loopTimer){clearTimeout(loopTimer);loopTimer=null;}
+      scheduled.forEach(function(o){try{o.stop();}catch(e){}});
+      scheduled=[];
+    }
+
+    function ligaCaixinha(){
+      try{
+        ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+        if(ctx.state==='suspended')ctx.resume();
+        agendaCiclo();
+        on=true;ic.textContent='🎵';btn.classList.add('spin');
+      }catch(e){
+        ic.textContent='🔇';
+      }
+    }
+
+    btn.addEventListener('click',function(){
+      if(!on){
+        // tenta o mp3 primeiro; se não existir, usa a caixinha
+        audio.volume=0.35;
+        var p=audio.play();
+        if(p&&p.then){
+          p.then(function(){
+            on=true;ic.textContent='🔊';btn.classList.add('spin');
+          }).catch(function(){ ligaCaixinha(); });
+        }else{ ligaCaixinha(); }
+      }else{
+        audio.pause();paraCaixinha();
+        on=false;ic.textContent='🔇';btn.classList.remove('spin');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
