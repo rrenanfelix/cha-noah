@@ -341,7 +341,7 @@
   <!-- Presente -->
   <div class="card d3">
     <h2>🎁 Sugestão de presente</h2>
-    <p class="presente">Fralda <span class="destaque">Pampers tamanho P ou M</span> + um mimo 💙</p>
+    <p class="presente">Fralda <span class="destaque">Pampers tamanho P ou M</span> + um mimi 💙</p>
   </div>
 
   <!-- Confirmar presença -->
@@ -491,9 +491,9 @@
     function ligaCaixinha(){
       try{
         ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
-        if(ctx.state==='suspended')ctx.resume();
-        agendaCiclo();
-        on=true;ic.textContent='🎵';btn.classList.add('spin');
+        var go=function(){agendaCiclo();on=true;ic.textContent='🎵';btn.classList.add('spin');};
+        if(ctx.state==='suspended'){ ctx.resume().then(go).catch(go); }
+        else { go(); }
       }catch(e){
         ic.textContent='🔇';
       }
@@ -501,16 +501,21 @@
 
     btn.addEventListener('click',function(){
       if(!on){
-        // tenta o mp3 primeiro; se não existir, usa a caixinha
-        audio.volume=0.35;
-        var p=audio.play();
-        if(p&&p.then){
-          p.then(function(){
-            on=true;ic.textContent='🔊';btn.classList.add('spin');
-          }).catch(function(){ ligaCaixinha(); });
-        }else{ ligaCaixinha(); }
+        // se houver um musica.mp3 DE VERDADE carregado, toca ele; senão, caixinha de música
+        var temMp3 = audio && audio.currentSrc && audio.readyState>=2 && !audio.error;
+        if(temMp3){
+          audio.volume=0.35;
+          var p=audio.play();
+          if(p&&p.then){
+            p.then(function(){on=true;ic.textContent='🔊';btn.classList.add('spin');})
+             .catch(function(){ ligaCaixinha(); });
+          }else{ on=true;ic.textContent='🔊';btn.classList.add('spin'); }
+        }else{
+          ligaCaixinha();
+        }
       }else{
-        audio.pause();paraCaixinha();
+        try{audio.pause();}catch(e){}
+        paraCaixinha();
         on=false;ic.textContent='🔇';btn.classList.remove('spin');
       }
     });
