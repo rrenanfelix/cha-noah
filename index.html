@@ -198,6 +198,86 @@
     .cd-box{min-width:64px;}
     .cd-num{font-size:25px;}
   }
+
+  /* ===================== ANIMAÇÕES EXTRAS ===================== */
+
+  /* arte: flutua com leve balanço */
+  @keyframes floaty{
+    0%,100%{transform:translateY(0) rotate(-.6deg);}
+    50%{transform:translateY(-12px) rotate(.6deg);}
+  }
+  .art{will-change:transform;}
+  .art-svg{
+    width:100%;max-width:460px;height:auto;display:block;margin:0 auto;
+    border-radius:22px;box-shadow:0 18px 50px rgba(70,116,176,.28);
+    will-change:transform;animation:floaty 6s ease-in-out 1.2s infinite;
+  }
+
+  /* título com brilho deslizante */
+  .titulo{
+    background:linear-gradient(90deg,#4674b0 0%,#86b3e6 50%,#4674b0 100%);
+    background-size:220% auto;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:rise 1s ease .5s forwards, shine 5s linear 1.6s infinite;
+  }
+  @keyframes shine{to{background-position:220% center;}}
+
+  /* cards entram ao rolar a página */
+  .card{animation:none!important;opacity:0;transform:translateY(34px) scale(.985);
+        transition:opacity .8s ease, transform .8s cubic-bezier(.2,.75,.3,1);}
+  .card.show{opacity:1;transform:none;}
+
+  /* segundos pulsam a cada tique */
+  .cd-box{transition:transform .15s ease;}
+  .cd-box.tick{animation:pop .5s ease;}
+  @keyframes pop{0%{transform:scale(1);}28%{transform:scale(1.16);}100%{transform:scale(1);}}
+
+  /* botão do WhatsApp respira pra chamar atenção */
+  .btn-wpp{animation:wppPulse 2.6s ease-in-out infinite;}
+  @keyframes wppPulse{
+    0%,100%{box-shadow:0 8px 20px rgba(37,211,102,.40);}
+    50%{box-shadow:0 10px 30px rgba(37,211,102,.66);}
+  }
+
+  /* balões subindo */
+  .fx-balloon{position:absolute;bottom:-170px;will-change:transform;animation:floatUp linear forwards;}
+  .fx-balloon .bod{width:100%;height:118%;border-radius:50% 50% 48% 48%;position:relative;
+        box-shadow:inset -6px -8px 0 rgba(0,0,0,.06);animation:sway 3.2s ease-in-out infinite;}
+  .fx-balloon .bod::before{content:"";position:absolute;left:28%;top:16%;width:22%;height:30%;
+        background:rgba(255,255,255,.55);border-radius:50%;}
+  .fx-balloon .bod::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:70px;
+        background:rgba(120,150,185,.45);transform:translateX(-50%);}
+  @keyframes floatUp{to{transform:translateY(-122vh) translateX(var(--drift,24px));}}
+  @keyframes sway{0%,100%{transform:translateX(-7px) rotate(-5deg);}50%{transform:translateX(7px) rotate(5deg);}}
+
+  /* coraçõezinhos flutuando */
+  .fx-heart{position:absolute;bottom:-40px;opacity:0;will-change:transform,opacity;animation:heartUp ease-in forwards;}
+  @keyframes heartUp{
+    0%{opacity:0;transform:translateY(0) scale(.5);}
+    14%{opacity:.9;}
+    100%{opacity:0;transform:translateY(-96vh) translateX(var(--drift,30px)) scale(1);}
+  }
+
+  /* aviãozinho cruzando o céu */
+  .fx-plane{position:absolute;left:-260px;display:flex;align-items:center;gap:10px;white-space:nowrap;will-change:transform;animation:flyAcross linear forwards;}
+  .fx-plane .ban{background:#fff;color:#4674b0;font-weight:700;font-size:13px;letter-spacing:1px;
+        padding:5px 14px;border-radius:30px;box-shadow:0 4px 12px rgba(70,116,176,.22);}
+  .fx-plane .pl{font-size:34px;transform:scaleX(-1);filter:drop-shadow(0 3px 4px rgba(70,116,176,.25));}
+  @keyframes flyAcross{to{transform:translateX(118vw);}}
+
+  /* estrela cadente */
+  .fx-shoot{position:absolute;width:140px;height:2px;border-radius:2px;opacity:0;
+        background:linear-gradient(90deg,rgba(255,255,255,0),#fff);animation:shoot 1.2s ease-out forwards;}
+  .fx-shoot::after{content:"";position:absolute;right:-2px;top:-2.5px;width:7px;height:7px;border-radius:50%;
+        background:#fff;box-shadow:0 0 10px 2px rgba(255,255,255,.9);}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(22deg);}
+        12%{opacity:1;}100%{opacity:0;transform:translate(300px,120px) rotate(22deg);}}
+
+  @media(prefers-reduced-motion:reduce){
+    .art,.titulo,.btn-wpp,.cloud,.star,.cd-box{animation:none!important;}
+    .card{opacity:1!important;transform:none!important;}
+  }
 </style>
 </head>
 <body>
@@ -215,39 +295,23 @@
     <img src="convite.png" alt="Convite Chá de Fraldas do Noah" class="art"
          onerror="this.style.display='none';document.getElementById('fb').style.display='block';">
     <!-- Arte recriada em HTML/CSS — aparece automaticamente se não houver convite.png -->
-    <div id="fb" class="invite" style="display:none;">
-      <span class="cl c1"></span><span class="cl c2"></span>
-      <span class="cl c3"></span><span class="cl c4"></span>
-
-      <div class="invite-arch">
-        <small>Chá de Fraldas do</small>
-        <div class="nome">Noah</div>
-      </div>
-
-      <div class="teddy">🧸<div class="base">☁️ ☁️</div></div>
-
-      <div class="invite-panel">
-        <p class="conv">Mamãe e papai convidam você<br>para o meu Chá de Fraldas 💙</p>
-
-        <div class="quando">
-          <div class="dia">
-            <div class="mes">Sábado</div>
-            <div class="num">20</div>
-            <div class="mes">de Junho</div>
-          </div>
-          <div class="sep"></div>
-          <div class="dia">
-            <div class="mes">às</div>
-            <div class="hora">15:30</div>
-          </div>
-        </div>
-
-        <p class="local"><b>Local:</b><br>Condomínio Caledônia, Camboriú<br>Casa A4 · QM L11</p>
-
-        <div class="gift"><b>SUGESTÃO DE PRESENTE</b><br>Fralda Pampers tamanho P + mimo</div>
-
-        <p class="rsvp">Confirmar presença até o dia 10/06</p>
-      </div>
+    <div id="fb" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" class="art-svg" role="img" aria-label="Ursinho aviador pilotando um aviaozinho azul"><defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef7fd"/><stop offset="1" stop-color="#d4e9f9"/></linearGradient>
+ <radialGradient id="halo" cx="0.5" cy="0.42" r="0.5"><stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+ <radialGradient id="furG" cx="0.42" cy="0.34" r="0.85"><stop offset="0" stop-color="#e7cba4"/><stop offset="0.62" stop-color="#d6b88e"/><stop offset="1" stop-color="#bd9b6f"/></radialGradient>
+ <linearGradient id="planeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c2def5"/><stop offset="1" stop-color="#7fb0dd"/></linearGradient>
+ <radialGradient id="cheekG" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f4bdaf"/><stop offset="1" stop-color="#f4bdaf" stop-opacity="0"/></radialGradient>
+</defs>
+<style>
+ .twk{animation:twk 3s ease-in-out infinite}
+ @keyframes twk{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+ #flyer{transform-box:fill-box;transform-origin:50% 50%;animation:flybob 4.6s ease-in-out infinite}
+ @keyframes flybob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+ #paw{transform-box:fill-box;transform-origin:55% 100%;animation:wave 1.7s ease-in-out infinite}
+ @keyframes wave{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(15deg)}}
+ @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><rect width="1200" height="1500" fill="url(#sky)"/><rect x="26" y="26" width="1148" height="1448" rx="46" fill="none" stroke="#fff" stroke-width="6" opacity="0.85"/><circle cx="600" cy="760" r="480" fill="url(#halo)"/><g opacity="0.95"><rect x="167.2" y="242.8" width="165.6" height="39.6" rx="20.160000000000004" fill="#ffffff"/><circle cx="178.0" cy="253.6" r="44.64" fill="#ffffff"/><circle cx="217.6" cy="229.84" r="51.839999999999996" fill="#ffffff"/><circle cx="262.96" cy="225.52" r="57.6" fill="#ffffff"/><circle cx="300.4" cy="241.36" r="47.52" fill="#ffffff"/><circle cx="325.6" cy="255.76" r="36.0" fill="#ffffff"/><circle cx="275.2" cy="261.52" r="50.4" fill="#ffffff"/><circle cx="224.8" cy="262.96" r="47.52" fill="#ffffff"/></g><g opacity="0.95"><rect x="861.1" y="201.4" width="197.79999999999998" height="47.300000000000004" rx="24.080000000000002" fill="#ffffff"/><circle cx="874.0" cy="214.3" r="53.32" fill="#ffffff"/><circle cx="921.3" cy="185.92" r="61.919999999999995" fill="#ffffff"/><circle cx="975.48" cy="180.76" r="68.8" fill="#ffffff"/><circle cx="1020.2" cy="199.68" r="56.760000000000005" fill="#ffffff"/><circle cx="1050.3" cy="216.88" r="43.0" fill="#ffffff"/><circle cx="990.1" cy="223.76" r="60.199999999999996" fill="#ffffff"/><circle cx="929.9" cy="225.48" r="56.760000000000005" fill="#ffffff"/></g><g opacity="0.8"><rect x="945.6" y="634.4" width="128.79999999999998" height="30.800000000000004" rx="15.680000000000001" fill="#ffffff"/><circle cx="954.0" cy="642.8" r="34.72" fill="#ffffff"/><circle cx="984.8" cy="624.32" r="40.32" fill="#ffffff"/><circle cx="1020.08" cy="620.96" r="44.800000000000004" fill="#ffffff"/><circle cx="1049.2" cy="633.28" r="36.96" fill="#ffffff"/><circle cx="1068.8" cy="644.48" r="28.0" fill="#ffffff"/><circle cx="1029.6" cy="648.96" r="39.199999999999996" fill="#ffffff"/><circle cx="990.4" cy="650.08" r="36.96" fill="#ffffff"/></g><g opacity="0.85"><rect x="91.4" y="713.6" width="147.2" height="35.2" rx="17.92" fill="#ffffff"/><circle cx="101.0" cy="723.2" r="39.68" fill="#ffffff"/><circle cx="136.2" cy="702.08" r="46.08" fill="#ffffff"/><circle cx="176.52" cy="698.24" r="51.2" fill="#ffffff"/><circle cx="209.8" cy="712.32" r="42.24" fill="#ffffff"/><circle cx="232.2" cy="725.12" r="32.0" fill="#ffffff"/><circle cx="187.4" cy="730.24" r="44.8" fill="#ffffff"/><circle cx="142.6" cy="731.52" r="42.24" fill="#ffffff"/></g><g opacity="0.9"><rect x="902.2" y="1077.8" width="165.6" height="39.6" rx="20.160000000000004" fill="#ffffff"/><circle cx="913.0" cy="1088.6" r="44.64" fill="#ffffff"/><circle cx="952.6" cy="1064.84" r="51.839999999999996" fill="#ffffff"/><circle cx="997.96" cy="1060.52" r="57.6" fill="#ffffff"/><circle cx="1035.4" cy="1076.36" r="47.52" fill="#ffffff"/><circle cx="1060.6" cy="1090.76" r="36.0" fill="#ffffff"/><circle cx="1010.2" cy="1096.52" r="50.4" fill="#ffffff"/><circle cx="959.8" cy="1097.96" r="47.52" fill="#ffffff"/></g><g opacity="0.8"><rect x="186.0" y="1114.0" width="138.0" height="33.0" rx="16.8" fill="#ffffff"/><circle cx="195.0" cy="1123.0" r="37.2" fill="#ffffff"/><circle cx="228.0" cy="1103.2" r="43.199999999999996" fill="#ffffff"/><circle cx="265.8" cy="1099.6" r="48.0" fill="#ffffff"/><circle cx="297.0" cy="1112.8" r="39.6" fill="#ffffff"/><circle cx="318.0" cy="1124.8" r="30.0" fill="#ffffff"/><circle cx="276.0" cy="1129.6" r="42.0" fill="#ffffff"/><circle cx="234.0" cy="1130.8" r="39.6" fill="#ffffff"/></g><path d="M 250.0 444.0 L 257.0 460.3 L 274.7 462.0 L 261.4 473.7 L 265.3 491.0 L 250.0 482.0 L 234.7 491.0 L 238.6 473.7 L 225.3 462.0 L 243.0 460.3 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 945.0 400.0 L 953.1 418.8 L 973.5 420.7 L 958.1 434.3 L 962.6 454.3 L 945.0 443.8 L 927.4 454.3 L 931.9 434.3 L 916.5 420.7 L 936.9 418.8 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 150.0 921.0 L 156.5 936.1 L 172.8 937.6 L 160.5 948.4 L 164.1 964.4 L 150.0 956.0 L 135.9 964.4 L 139.5 948.4 L 127.2 937.6 L 143.5 936.1 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 1050.0 879.0 L 1057.0 895.3 L 1074.7 897.0 L 1061.4 908.7 L 1065.3 926.0 L 1050.0 917.0 L 1034.7 926.0 L 1038.6 908.7 L 1025.3 897.0 L 1043.0 895.3 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 430.0 230.0 L 435.4 242.6 L 449.0 243.8 L 438.7 252.8 L 441.8 266.2 L 430.0 259.2 L 418.2 266.2 L 421.3 252.8 L 411.0 243.8 L 424.6 242.6 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 820.0 1156.0 L 826.5 1171.1 L 842.8 1172.6 L 830.5 1183.4 L 834.1 1199.4 L 820.0 1191.0 L 805.9 1199.4 L 809.5 1183.4 L 797.2 1172.6 L 813.5 1171.1 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 380.0 1102.0 L 384.9 1113.3 L 397.1 1114.4 L 387.9 1122.6 L 390.6 1134.6 L 380.0 1128.3 L 369.4 1134.6 L 372.1 1122.6 L 362.9 1114.4 L 375.1 1113.3 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><path d="M 1040.0 1130.0 L 1045.4 1142.6 L 1059.0 1143.8 L 1048.7 1152.8 L 1051.8 1166.2 L 1040.0 1159.2 L 1028.2 1166.2 L 1031.3 1152.8 L 1021.0 1143.8 L 1034.6 1142.6 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round" class="twk" style="transform-box:fill-box;transform-origin:center"/><g id="flyer"><path d="M 860 800 q 88 -36 120 26 q -52 30 -120 18 Z" fill="#6b9bce" stroke="#6f9ec9" stroke-width="4"/><path d="M 858 866 q 78 4 116 40 q -54 22 -116 6 Z" fill="#a9cdee" stroke="#6f9ec9" stroke-width="4"/><path d="M 470 800 q -70 -34 -118 8 q 44 34 118 22 Z" fill="#7fb0dd" stroke="#6f9ec9" stroke-width="4"/><ellipse cx="668" cy="862" rx="234" ry="120" fill="url(#planeG)" stroke="#6f9ec9" stroke-width="5"/><ellipse cx="700" cy="892" rx="180" ry="74" fill="#cfe3f6" opacity="0.55"/><path d="M 520 752 a 120 120 0 0 0 0 220 q -84 -16 -84 -110 q 0 -94 84 -110 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="4"/><ellipse cx="452" cy="862" rx="40" ry="74" fill="#cfe3f6" stroke="#6f9ec9" stroke-width="4"/><path d="M 828.0 828.0 L 843.1 863.2 L 881.3 866.7 L 852.5 892.0 L 860.9 929.3 L 828.0 909.8 L 795.1 929.3 L 803.5 892.0 L 774.7 866.7 L 812.9 863.2 Z" fill="#f5d24e" stroke="#e2b330" stroke-width="2.5" stroke-linejoin="round"/><path d="M 560 770 q 110 -54 224 0 l 0 70 q -112 40 -224 0 Z" fill="#dcebf8" stroke="#6f9ec9" stroke-width="4" opacity="0.95"/><g id="bear"><circle cx="582" cy="506" r="44" fill="url(#furG)"/><circle cx="582" cy="510" r="23" fill="#e7c6a2"/><circle cx="748" cy="506" r="44" fill="url(#furG)"/><circle cx="748" cy="510" r="23" fill="#e7c6a2"/><circle cx="664" cy="586" r="120" fill="url(#furG)"/><ellipse cx="664" cy="640" rx="60" ry="47" fill="#efdcc2"/><ellipse cx="664" cy="618" rx="20" ry="15" fill="#7d5234"/><ellipse cx="658" cy="613" rx="7" ry="5" fill="#fff" opacity="0.85"/><path d="M 664 632 q 0 14 -12 18 M 664 632 q 0 14 12 18" fill="none" stroke="#5c2f22" stroke-width="4" stroke-linecap="round"/><path d="M 638 656 Q 664 668 690 656 Q 684 692 664 692 Q 644 692 638 656 Z" fill="#5c2f22"/><ellipse cx="667" cy="682" rx="15" ry="11" fill="#e0564f"/><ellipse cx="622" cy="590" rx="17" ry="20" fill="#241f1d"/><circle cx="617" cy="582" r="6.5" fill="#fff"/><circle cx="627" cy="596" r="3" fill="#fff" opacity="0.9"/><ellipse cx="706" cy="590" rx="17" ry="20" fill="#241f1d"/><circle cx="701" cy="582" r="6.5" fill="#fff"/><circle cx="711" cy="596" r="3" fill="#fff" opacity="0.9"/><ellipse cx="596" cy="636" rx="25" ry="16" fill="url(#cheekG)"/><ellipse cx="732" cy="636" rx="25" ry="16" fill="url(#cheekG)"/><path d="M 548 566 a 120 120 0 0 1 232 0 q -116 -56 -232 0 Z" fill="#3f5f88"/><path d="M 548 566 a 120 120 0 0 1 232 0 q -116 -46 -232 0 Z" fill="#5c7da8" opacity="0.45"/><path d="M 552 556 q 112 -46 224 0" fill="none" stroke="#2e4768" stroke-width="3.5" opacity="0.6"/><path d="M 548 556 q -26 34 -6 80 q 30 8 50 -12 q -30 -30 -14 -66 Z" fill="#3f5f88"/><path d="M 780 556 q 26 34 6 80 q -30 8 -50 -12 q 30 -30 14 -66 Z" fill="#3f5f88"/><rect x="700" y="452" width="16" height="26" rx="8" fill="#2e4768"/><circle cx="708" cy="450" r="11" fill="#3f5f88"/><path d="M 590 540 q 74 -22 148 0" fill="none" stroke="#2e4768" stroke-width="9"/><rect x="598" y="516" width="60" height="48" rx="22" fill="#f5d24e" stroke="#e2b330" stroke-width="4"/><rect x="607" y="524" width="42" height="32" rx="15" fill="#bcd9ef"/><path d="M 615 530 q 13 -6 26 0" fill="none" stroke="#fff" stroke-width="4" opacity="0.7"/><rect x="670" y="516" width="60" height="48" rx="22" fill="#f5d24e" stroke="#e2b330" stroke-width="4"/><rect x="679" y="524" width="42" height="32" rx="15" fill="#bcd9ef"/><path d="M 687 530 q 13 -6 26 0" fill="none" stroke="#fff" stroke-width="4" opacity="0.7"/><rect x="654" y="528" width="20" height="20" rx="6" fill="#e2b330"/></g><path d="M 566 700 q 98 48 196 0 q 6 28 -10 46 q -96 46 -180 2 q -14 -22 -6 -48 Z" fill="#f4f7fb" stroke="#dde6f0" stroke-width="2"/><path d="M 742 736 q 30 52 12 112 q -28 6 -40 -8 q 8 -58 -4 -100 Z" fill="#f4f7fb" stroke="#dde6f0" stroke-width="2"/><path d="M 612 742 l 14 92 M 716 742 l -12 92" stroke="#5478a6" stroke-width="11" stroke-linecap="round"/><rect x="604" y="828" width="22" height="16" rx="4" fill="#5478a6"/><rect x="700" y="828" width="22" height="16" rx="4" fill="#5478a6"/><g id="paw"><ellipse cx="566" cy="752" rx="33" ry="30" fill="url(#furG)"/><ellipse cx="564" cy="756" rx="18" ry="15" fill="#efdcc2"/><circle cx="552" cy="742" r="6" fill="#efdcc2"/><circle cx="566" cy="738" r="6" fill="#efdcc2"/><circle cx="579" cy="744" r="6" fill="#efdcc2"/></g><path d="M 506 776 a 158 44 0 0 0 316 0 l 0 8 a 158 48 0 0 1 -316 0 Z" fill="#7fb0dd" stroke="#6f9ec9" stroke-width="5"/><path d="M 512 782 a 154 42 0 0 0 304 0" fill="none" stroke="#fff" stroke-width="3" opacity="0.5"/><ellipse cx="772" cy="968" rx="150" ry="46" fill="#cfe3f6" stroke="#6f9ec9" stroke-width="5" transform="rotate(6 772 968)"/></g><text x="600" y="1372" text-anchor="middle" font-family="Dancing Script" font-size="150" fill="#365b86">Noah</text><text x="600" y="1426" text-anchor="middle" font-family="Quicksand" font-weight="600" letter-spacing="14" font-size="30" fill="#7aa0c4">CHEGANDO EM BREVE</text></svg>
     </div>
   </div>
 
@@ -277,7 +341,7 @@
   <!-- Presente -->
   <div class="card d3">
     <h2>🎁 Sugestão de presente</h2>
-    <p class="presente">Fralda <span class="destaque">Pampers tamanho P</span> + um mimo 💙</p>
+    <p class="presente">Fralda <span class="destaque">Pampers tamanho P ou M</span> + um mimo 💙</p>
   </div>
 
   <!-- Confirmar presença -->
@@ -335,7 +399,10 @@
     document.getElementById('d').textContent=d;
     document.getElementById('h').textContent=dois(h);
     document.getElementById('m').textContent=dois(m);
-    document.getElementById('s').textContent=dois(s);
+    var sEl=document.getElementById('s');
+    sEl.textContent=dois(s);
+    var box=sEl.parentElement;
+    box.classList.remove('tick');void box.offsetWidth;box.classList.add('tick');
   }
   tick();setInterval(tick,1000);
 
@@ -447,6 +514,82 @@
         on=false;ic.textContent='🔇';btn.classList.remove('spin');
       }
     });
+  })();
+
+  // ===== Camada de animações (balões, corações, avião, estrela) =====
+  (function(){
+    var sky=document.getElementById('sky');
+    var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // revelar cards ao rolar
+    var cards=document.querySelectorAll('.card');
+    if('IntersectionObserver' in window && !reduz){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);} });
+      },{threshold:0.18});
+      cards.forEach(function(c){io.observe(c);});
+      // garante exibição caso algo falhe
+      setTimeout(function(){cards.forEach(function(c){
+        var r=c.getBoundingClientRect();
+        if(r.top<window.innerHeight)c.classList.add('show');
+      });},400);
+    }else{
+      cards.forEach(function(c){c.classList.add('show');});
+    }
+    if(reduz)return; // sem partículas pra quem prefere menos movimento
+
+    var CORES=['#8fbce6','#5b86c4','#aed3f2','#cfe0f0','#bcd9ef','#f3b9c6'];
+
+    function balao(){
+      var s=34+Math.random()*34;
+      var b=document.createElement('div');b.className='fx-balloon';
+      b.style.left=(Math.random()*92)+'%';
+      b.style.width=s+'px';
+      b.style.animationDuration=(13+Math.random()*8)+'s';
+      b.style.setProperty('--drift',(Math.random()*70-35)+'px');
+      var bod=document.createElement('div');bod.className='bod';
+      bod.style.background=CORES[Math.floor(Math.random()*CORES.length)];
+      bod.style.animationDelay=(-Math.random()*3)+'s';
+      b.appendChild(bod);sky.appendChild(b);
+      setTimeout(function(){b.remove();},22000);
+    }
+
+    function coracao(){
+      var h=document.createElement('div');h.className='fx-heart';
+      h.textContent=Math.random()<0.5?'💙':'🤍';
+      h.style.left=(Math.random()*94)+'%';
+      h.style.fontSize=(15+Math.random()*16)+'px';
+      h.style.animationDuration=(8+Math.random()*5)+'s';
+      h.style.setProperty('--drift',(Math.random()*60-30)+'px');
+      sky.appendChild(h);
+      setTimeout(function(){h.remove();},14000);
+    }
+
+    function aviao(){
+      var p=document.createElement('div');p.className='fx-plane';
+      p.style.top=(7+Math.random()*16)+'%';
+      p.style.animationDuration=(15+Math.random()*6)+'s';
+      var ban=document.createElement('span');ban.className='ban';ban.textContent='Noah 💙';
+      var pl=document.createElement('span');pl.className='pl';pl.textContent='✈️';
+      p.appendChild(ban);p.appendChild(pl);sky.appendChild(p);
+      setTimeout(function(){p.remove();},22000);
+    }
+
+    function estrelaCadente(){
+      var s=document.createElement('div');s.className='fx-shoot';
+      s.style.left=(Math.random()*55)+'%';
+      s.style.top=(Math.random()*40)+'%';
+      sky.appendChild(s);
+      setTimeout(function(){s.remove();},1400);
+    }
+
+    // ritmo suave e elegante
+    balao();balao();coracao();
+    setInterval(balao,3600);
+    setInterval(coracao,4200);
+    setInterval(aviao,17000);
+    setInterval(estrelaCadente,11000);
+    setTimeout(aviao,3000);
   })();
 </script>
 </body>
